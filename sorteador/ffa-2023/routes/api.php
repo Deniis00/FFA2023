@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\FuncionarioController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/obtener_funcionario_a_mostrar',[FuncionarioController::class,'obtener_funcionario_a_mostrar']);
+Route::put('/funcionario_mostrado/{id}',[FuncionarioController::class,'funcionario_mostrado']);
+Route::put('/actualizar_funcionario_a_mostrar/{id_funcionario}',[FuncionarioController::class,'actualizar_funcionario_a_mostrar']);
+Route::get('/funcionarios_para_sorteo',[FuncionarioController::class,'funcionarios_para_sorteo']);
+
