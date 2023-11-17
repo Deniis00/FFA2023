@@ -17,7 +17,7 @@ class FuncionarioResource extends JsonResource
         //return parent::toArray($request);
         return [
             'id' => $this->id,
-            'id_funcionario' => $this->id_funcionario,
+            'cedula_funcionario' => $this->cedula_funcionario,
             'nombre_funcionario' => $this->nombre_funcionario,
             'codigo_funcionario' => $this->codigo_funcionario,
            ];

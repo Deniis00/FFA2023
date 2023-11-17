@@ -9,112 +9,53 @@ use Illuminate\Http\Request;
 
 class FuncionarioController extends Controller
 {
-    public function show(Funcionario $funcionario)
-    {
-        //dd('show');
-        return new FuncionarioResource($funcionario);
-    }
-
-    public function obtener_funcionario_a_mostrar()
-    {
-
-        $funcionario = new Funcionario();
-        $funcionario = Funcionario::where('muestra_funcionario', 1)->first();
-        //dd($funcionario->id);
-        if($funcionario != null ){
-        return response()->json([
-            'funcionario' => [
-                'id' => $funcionario -> id,
-                'id_funcionario' => $funcionario ->id_funcionario,
-                'nombre_funcionario' => $funcionario->nombre_funcionario,
-            ],
-            'success' => 1,
-            'error' => 0
-        ]);
-    }
-
-
-        return response()->json([
-            'funcionario' => [],
-            'success' => 0,
-            'error' => 0,
-            'message' => 'No existe datos a mostrar'
-        ]);
-    }
-
-    public function funcionario_mostrado($id)
-    {
+   
+    public function obtener_funcionario_que_llego($cedula_funcionario){
         try {
-            $funcionario = Funcionario::find($id);
-
-            $funcionario->muestra_funcionario = 2;
-
-            $funcionario->update();
-
-            return response()->json([
-                'funcionario' => [
-                    'id' => $funcionario -> id,
-                    'id_funcionario' => $funcionario ->id_funcionario,
-                    'nombre_funcionario' => $funcionario->nombre_funcionario,
-                ],
-                'success' => 1,
-                'error' => 0,
-                'message' => 'Actualizado con exito!!'
-            ]);
-        } catch (Exception $ex) {
-            return response()->json([
-                'funcionario' => [],
-                'success' => 0,
-                'error' => 1,
-                'message' => "Error al actualizar Bloque " . $ex->getMessage()
-            ]);
-        }
-    }
-
-    public function actualizar_funcionario_a_mostrar(int $id_funcionario)
-    {
-
-
-        try {
-            $funcionario = new Funcionario();
-            $funcionario = Funcionario::where('id_funcionario', $id_funcionario)->first();
-            $funcionario->muestra_funcionario = 1;
-            $funcionario->update();
-            return response()->json([
-                'funcionario' => [
-                    'id' => $funcionario -> id,
-                    'id_funcionario' => $funcionario ->id_funcionario,
-                    'nombre_funcionario' => $funcionario->nombre_funcionario,
-                ],
-                'success' => 1,
-                'error' => 0,
-                'message' => 'Actualizado con exito!!'
-            ]);
-
-        } catch (\Exception $ex) {
-            return response()->json([
-                'funcionario' => [],
-                'success' => 0,
-                'error' => 1,
-                'message' => "Error al actualizar Bloque " . $ex->getMessage()
-            ]);
-        }
-    }
-
-    public function funcionarios_sin_mostrar()
-    {
-
-        try {
+           
+            $funcionario = Funcionario::where('cedula_funcionario', $cedula_funcionario)
+                                        ->where('participa_sorteo', 1)
+                                        ->first();
             
-            $funcionarios = Funcionario::where('muestra_funcionario', 0)->get();
+            if (!$funcionario) {
+                return response()->json([
+                    'success' => 1,
+                    'error' => 0,
+                    'message' => 'Funcionario no encontrado',
+                    'data' => null
+                ]);
+            }
 
-            return FuncionarioResource::collection($funcionarios );
+            if ($funcionario->registro_entrada == 1) {
+                return response()->json([
+                    'success' => 1,
+                    'error' => 0,
+                    'message' => 'Funcionario ya registrado',
+                    'data' => null
+                ]);
+            }
+
+
+
+            /*ACTUALIZA FUNCIONARIO */
+            $funcionario->registro_entrada = 1;
+            $funcionario->update();
+
+            return response()->json([
+                'success' => 1,
+                'error' => 0,
+                'message' => "Consulta con exitos.",
+                'data' => new FuncionarioResource($funcionario)
+            ]);
 
         } catch (\Exception $ex) {
             return response()->json([
                 'success' => 0,
                 'error' => 1,
-                'message' => "Error al actualizar Bloque " . $ex->getMessage()
+                'sin_datos'=> 0,
+                'message' => "Error al obtener funcionario " . $ex->getMessage(),
+                'data' => null
+                
             ]);
         }
     }
@@ -125,7 +66,7 @@ class FuncionarioController extends Controller
         try {
            
             $funcionarios = Funcionario::where('participa_sorteo', 1)
-                                        ->where('hora_llegada','<=','19:30:00')->get();
+                                        ->where('hora_llegada','<=','22:30:00')->get();
 
             return FuncionarioResource::collection($funcionarios);
 

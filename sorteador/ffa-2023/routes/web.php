@@ -17,12 +17,3 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/videos', function () {
-    return view('videos');
-});
-Route::get('/videos2', function () {
-    return view('videos2');
-});
-
-Route::get('/reproducir/{videoId}', 'VideoController@showVideo');
-
