@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+  <Profiles />
+  <Settings>
+    <Setting Name="Width" Type="System.String" Scope="User">
+      <Value Profile="(Default)">200</Value>
+    </Setting>
+    <Setting Name="Height" Type="System.String" Scope="User">
+      <Value Profile="(Default)">260</Value>
+    </Setting>
+    <Setting Name="ImgDir" Type="System.String" Scope="User">
+      <Value Profile="(Default)">X:\2011_FONDO.jpg</Value>
+    </Setting>
+    <Setting Name="apiurlObtenerListado" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://10.10.41.36/api/funcionarios_para_sorteo</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
