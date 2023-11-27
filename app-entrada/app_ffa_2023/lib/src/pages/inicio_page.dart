@@ -76,7 +76,7 @@ class _InicioPageState extends State<InicioPage> {
               height: 50.0,
               child: ElevatedButton(
                 onPressed: () {
-                  print('onPress entrada');
+                    Navigator.pushNamed(context, 'entrada');
                 },
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.all(15),

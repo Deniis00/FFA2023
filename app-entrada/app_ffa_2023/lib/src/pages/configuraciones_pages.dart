@@ -51,25 +51,35 @@ class _ConfiguracionesPageState extends State<ConfiguracionesPage> {
   }
 
   Widget _body() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 16.0, left: 16.0),
+    return Center(
       child: Container(
-        color: Colors.green,
+        color: Colors.grey[100],
         child: SizedBox(
           width: 400.0,
           height: 400.0,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize:
-                MainAxisSize.max, // Alinea el Column al centro verticalmente
             children: [
+              const SizedBox(
+                height: 30.0,
+              ),
               const Text("Ingrese el URL de la Api:",
                   style:
                       TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
               TextField(
                   autofocus: true,
                   controller: _urlApi,
-                  onSubmitted: (value) => {pref.apiUrl = value})
+                  onSubmitted: (value) => {pref.apiUrl = value}),
+              const SizedBox(
+                height: 100.0,
+              ),
+              const Text("Ingrese el URL del WS:",
+                  style:
+                      TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
+              TextField(
+                  autofocus: true,
+                  controller: _urlWS,
+                  onSubmitted: (value) => {pref.urlWS = value})
             ],
           ),
         ),

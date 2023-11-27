@@ -1,4 +1,5 @@
 import 'package:app_ffa_2023/src/pages/configuraciones_pages.dart';
+import 'package:app_ffa_2023/src/pages/entrada_pages.dart';
 import 'package:app_ffa_2023/src/pages/inicio_page.dart';
 import 'package:app_ffa_2023/src/utils/preferencias_usuario.dart';
 import 'package:flutter/material.dart';
@@ -36,8 +37,9 @@ class _MyAppState extends State<MyApp> {
         initialRoute: 'inicio',
         onGenerateRoute: (RouteSettings settings) {
           var routes = <String, WidgetBuilder>{
-            'inicio': (ctx) => InicioPage(),
-            'configuraciones': (ctx) => ConfiguracionesPage(),
+            'inicio': (ctx) => const InicioPage(),
+            'configuraciones': (ctx) => const ConfiguracionesPage(),
+            'entrada': (ctx) => const EntradaPages(),
           };
 
           WidgetBuilder builder = routes[settings.name]!;
