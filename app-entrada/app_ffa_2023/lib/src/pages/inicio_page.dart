@@ -1,3 +1,4 @@
+import 'package:app_ffa_2023/src/utils/preferencias_usuario.dart';
 import 'package:flutter/material.dart';
 
 class InicioPage extends StatefulWidget {
@@ -8,6 +9,8 @@ class InicioPage extends StatefulWidget {
 }
 
 class _InicioPageState extends State<InicioPage> {
+  final pref = PreferenciasUsuario();
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -40,8 +43,8 @@ class _InicioPageState extends State<InicioPage> {
           mainAxisSize: MainAxisSize.min, // Utiliza el espacio mínimo necesario
           children: [
             SizedBox(
-              width: 200.0,
-              height: 50.0,
+              width: 280.0,
+              height: 70.0,
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.pushNamed(context, 'configuraciones');
@@ -52,16 +55,20 @@ class _InicioPageState extends State<InicioPage> {
                     borderRadius: BorderRadius.circular(5.0),
                   ),
                   elevation: 0.0,
-                  backgroundColor: Colors.lightBlue,
+                  backgroundColor: Colors.grey,
                   textStyle: const TextStyle(
                     color: Colors.white,
-                    fontSize: 18,
+                    fontSize: 25,
                   ),
                 ),
                 child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.center, // Alinea el Row al centro horizontalmente
+                  mainAxisAlignment: MainAxisAlignment
+                      .center, // Alinea el Row al centro horizontalmente
                   children: [
-                    Icon(Icons.settings_applications),
+                    Icon(
+                      Icons.settings_applications,
+                      size: 25,
+                    ),
                     SizedBox(width: 8.0),
                     Text("Configuraciones"),
                   ],
@@ -72,11 +79,19 @@ class _InicioPageState extends State<InicioPage> {
               height: 10.0,
             ),
             SizedBox(
-              width: 200.0,
-              height: 50.0,
+              width: 280.0,
+              height: 70.0,
               child: ElevatedButton(
                 onPressed: () {
+                  if (pref.apiUrl == "") {
+                    mostrarMensajeConfiguracion(
+                        'La URL de la API no está configurada.');
+                  } else if (pref.urlWS == "") {
+                    mostrarMensajeConfiguracion(
+                        'La URL del Websocket no está configurada.');
+                  } else {
                     Navigator.pushNamed(context, 'entrada');
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.all(15),
@@ -84,8 +99,8 @@ class _InicioPageState extends State<InicioPage> {
                     borderRadius: BorderRadius.circular(5.0),
                   ),
                   elevation: 0.0,
-                  backgroundColor: Colors.lightBlue,
-                  textStyle: const TextStyle(color: Colors.white, fontSize: 18),
+                  backgroundColor: Colors.grey,
+                  textStyle: const TextStyle(color: Colors.white, fontSize: 25),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment
@@ -93,8 +108,8 @@ class _InicioPageState extends State<InicioPage> {
                   children: [
                     Image.asset(
                       'assets/img/boleto.png',
-                      width: 40, // Ajusta el ancho según tus necesidades
-                      height: 40, // Ajusta la altura según tus necesidades
+                      width: 25, // Ajusta el ancho según tus necesidades
+                      height: 25, // Ajusta la altura según tus necesidades
                     ),
                     const SizedBox(width: 8.0),
                     const Text("Entrada"),
@@ -107,4 +122,44 @@ class _InicioPageState extends State<InicioPage> {
       ),
     );
   }
+
+  void mostrarMensajeConfiguracion(String mensaje) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text(
+            'Advertencia',
+            textAlign: TextAlign.center,
+          ),
+          content: Text(mensaje),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Cierra el AlertDialog
+              },
+              child: const Text(
+                'Aceptar',
+                style: TextStyle(color: Colors.green),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.pushNamed(
+                  context,
+                  'configuraciones',
+                );
+              },
+              child: const Text(
+                'Configurar',
+                style: TextStyle(color: Colors.orange),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
 }

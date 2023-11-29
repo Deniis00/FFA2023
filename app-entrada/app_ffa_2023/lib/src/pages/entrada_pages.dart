@@ -12,7 +12,6 @@ class EntradaPages extends StatefulWidget {
 class _EntradaPagesState extends State<EntradaPages> {
   late VideoPlayerController _videoPlayerController;
   late ChewieController _chewieController;
-  late FocusNode _textFieldFocusNode;
   final TextEditingController _textFieldController = TextEditingController();
 
   @override
@@ -28,15 +27,12 @@ class _EntradaPagesState extends State<EntradaPages> {
       looping: true,
       showControls: false,
     );
-
-    _textFieldFocusNode = FocusNode();
   }
 
   @override
   void dispose() {
     _videoPlayerController.dispose();
     _chewieController.dispose();
-    _textFieldFocusNode.dispose();
     _textFieldController.dispose();
     super.dispose();
   }
@@ -54,11 +50,14 @@ class _EntradaPagesState extends State<EntradaPages> {
   }
 
   void handleAcceptButtonPress() {
-    print('Aceptar presionado');
+    String currentText = _textFieldController.text;
+    if (currentText.isEmpty) {
+          mostrarMensaje('Validaciones', "Debe insertar su código de acceso.");
+    }
   }
 
   @override
-   Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -76,32 +75,57 @@ class _EntradaPagesState extends State<EntradaPages> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: InkWell(
-                        onTap: () {
-                          _textFieldFocusNode.requestFocus();
-                        },
-                        child: TextField(
-                          focusNode: _textFieldFocusNode,
-                          controller: _textFieldController,
-                          readOnly: true,
-                          onTap: () {
-                            _textFieldFocusNode.requestFocus();
-                          },
-                          style: const TextStyle(color: Colors.black, fontSize: 30.0),
-                          decoration: InputDecoration(
-                            labelText: 'Ingrese su código de acceso',
-                           // border: const OutlineInputBorder(),
-                            fillColor: Colors.white,
-                            filled: true,
-                            suffixIcon: IconButton(
-                              onPressed: () {
-                                _textFieldController.clear();
-                              },
-                              icon: const Icon(Icons.clear),
+                    child: Container(
+                      decoration: const BoxDecoration(
+                          border: Border(
+                        right: BorderSide(color: Colors.black, width: 2.0),
+                      )),
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment
+                              .center, // Alineación vertical al centro
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Text("FFA 2023",
+                                style: TextStyle(
+                                    fontSize: 40.0,
+                                    fontWeight: FontWeight.bold)),
+                            const SizedBox(height: 40.0),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: TextFormField(
+                                controller: _textFieldController,
+                                readOnly: true,
+                                inputFormatters: [],
+                                showCursor: true,
+                                cursorColor: Colors.black, // Color del cursor
+                                style: const TextStyle(
+                                    color: Colors.black, fontSize: 30.0),
+                                decoration: InputDecoration(
+                                  labelText: 'Ingrese su código de acceso',
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  labelStyle:
+                                      const TextStyle(color: Colors.black),
+                                  suffixIcon: IconButton(
+                                    onPressed: () {
+                                      _textFieldController.clear();
+                                    },
+                                    icon: const Icon(
+                                      Icons.clear,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
+                            const SizedBox(height: 30.0),
+                            const Text("BIENVENIDO",
+                                style: TextStyle(
+                                    fontSize: 40.0,
+                                    fontWeight: FontWeight.bold))
+                          ],
                         ),
                       ),
                     ),
@@ -160,120 +184,25 @@ class _EntradaPagesState extends State<EntradaPages> {
       ),
     );
   }
-  /*Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height / 1.5,
-            child: Chewie(controller: _chewieController),
-          ),
-          Expanded(
-            child: Container(
-              color: const Color.fromRGBO(255, 0, 0, 1),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          _textFieldFocusNode.requestFocus();
-                        },
-                        child: TextField(
-                          focusNode: _textFieldFocusNode,
-                          controller: _textFieldController,
-                          readOnly: true,
-                          onTap: () {
-                            _textFieldFocusNode.requestFocus();
-                          },
-                          style: const TextStyle(color: Colors.black),
-                          decoration:  InputDecoration(
-                            labelText: 'Ingrese su código de acceso',
-                            border: const OutlineInputBorder(),
-                            fillColor: Colors.white,
-                            filled: true,
-                            suffixIcon: IconButton( 
-                              onPressed: () {
-                                  _textFieldController.clear();
-                                },
-                              icon: const Icon(Icons.clear), 
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              buildKeyboardButton('1'),
-                              buildKeyboardButton('2'),
-                              buildKeyboardButton('3'),
-                            ],
-                          ),
-                          const SizedBox(height: 10.0),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              buildKeyboardButton('4'),
-                              buildKeyboardButton('5'),
-                              buildKeyboardButton('6'),
-                            ],
-                          ),
-                          const SizedBox(height: 10.0),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              buildKeyboardButton('7'),
-                              buildKeyboardButton('8'),
-                              buildKeyboardButton('9'),
-                            ],
-                          ),
-                          const SizedBox(height: 10.0),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              buildDeleteButton(),
-                              buildKeyboardButton('0'),
-                              buildAcceptButton(),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-*/
+
   Widget buildKeyboardButton(String buttonText) {
     return SizedBox(
-      width: 90.0,
-      height: 70.0,
+      width: 110.0,
+      height: 90.0,
       child: ElevatedButton(
         onPressed: () {
           handleNumericButtonPress(buttonText);
         },
+        style: ElevatedButton.styleFrom(
+          foregroundColor: Colors.white, backgroundColor: Colors.grey[600], // Color del texto del botón
+          side: const BorderSide(color: Colors.black87, width: 2.0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0), // Radio de la esquina
+          ), // Borde del botón
+        ),
         child: Text(
           buttonText,
-          style: TextStyle(fontSize: 50.0),
+          style: const TextStyle(fontSize: 50.0),
         ),
       ),
     );
@@ -281,30 +210,86 @@ class _EntradaPagesState extends State<EntradaPages> {
 
   Widget buildDeleteButton() {
     return SizedBox(
-      width: 90.0,
-      height: 70.0,
+      width: 110.0,
+      height: 90.0,
       child: ElevatedButton(
         onPressed: () {
           handleDeleteButtonPress();
         },
-        child: Text(
+        style: ElevatedButton.styleFrom(
+          foregroundColor: Colors.white, backgroundColor: Colors.black45, // Color del texto del botón
+          side: const BorderSide(color: Colors.black87, width: 2.0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0), // Radio de la esquina
+          ), // Borde del botón
+        ),
+        child: const Text(
           "x",
           style: TextStyle(fontSize: 50.0),
-        )//Icon(Icons.no_backpack, size: 50.0),
+        ),
       ),
     );
   }
 
   Widget buildAcceptButton() {
     return SizedBox(
-      width: 90.0,
-      height: 70.0,
+      width: 110.0,
+      height: 90.0,
       child: ElevatedButton(
         onPressed: () {
           handleAcceptButtonPress();
         },
-        child: Icon(Icons.check, size: 50.0),
+        style: ElevatedButton.styleFrom(
+          foregroundColor: Colors.white, backgroundColor: Colors.green, // Color del texto del botón
+          side: const BorderSide(color: Colors.black87, width: 2.0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0), // Radio de la esquina
+          ), // Borde del botón
+        ),
+        child: const Icon(Icons.check, size: 50.0),
       ),
     );
   }
+
+void mostrarMensaje(String titulo, String mensaje) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0), // Borde redondeado
+        ),
+         contentPadding: EdgeInsets.zero,
+        title: Container(
+          padding:  EdgeInsets.zero, // Ajusta el padding según tus necesidades
+          color: Colors.grey, // Color de fondo del título
+          child: Text(
+            titulo,
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+          ),
+        ),
+        content: Text(
+          mensaje,
+          style: const TextStyle(fontSize: 20.0),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(); // Cierra el AlertDialog
+            },
+            child: const Text(
+              'Aceptar',
+              style: TextStyle(color: Colors.green, fontSize: 20.0),
+            ),
+          ),
+        ],
+      );
+    },
+  );
+}
+
+
+
+
 }
