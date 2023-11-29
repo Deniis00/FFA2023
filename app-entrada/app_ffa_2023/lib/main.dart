@@ -4,19 +4,45 @@ Future<void> main() async {
   final obsWebSocket = await ObsWebSocket.connect('ws://10.10.40.157:4455', password: 'prueba123');
   print('Conexión exitosa');
 
-  final response = await obsWebSocket.send('GetSceneList');
-  
-  if (response!['status'] == 'ok') {
-    final scenes = response['scenes'] as List<dynamic>;
+  // Obtener el listado de escenas
+  final responseGetSceneList = await obsWebSocket.send('GetSceneList');
 
-    print('Listado de escenas:');
-    for (final scene in scenes) {
-      print(scene['name']);
+  if (responseGetSceneList?.requestStatus?.result == true) {
+    final responseData = responseGetSceneList?.responseData;
+
+    if (responseData != null) {
+      final scenes = responseData['scenes'] as List<dynamic>;
+
+      // Imprimir el listado de escenas
+      print('Listado de escenas:');
+      for (final scene in scenes) {
+        final sceneName = scene['sceneName'];
+        print(sceneName);
+      }
+
+      // Cambiar a una escena específica (por ejemplo, la primera escena en la lista)
+      if (scenes.isNotEmpty) {
+        final firstSceneName = scenes.first['sceneName'];
+        await changeToScene(obsWebSocket, firstSceneName);
+      }
+    } else {
+      print('Error: No se encontraron datos de escenas en la respuesta.');
     }
   } else {
-    print('Error al obtener el listado de escenas: ${response['error']}');
+    print('Error: La operación para obtener el listado de escenas no fue exitosa. Detalles: ${responseGetSceneList?.requestStatus}');
   }
 
   // Cerrar la conexión
-  await obsWebSocket.disconnect();
+  await obsWebSocket.close();
+}
+
+// Función para cambiar a una escena específica
+Future<void> changeToScene(ObsWebSocket obsWebSocket, String sceneName) async {
+  final responseSwitchScene = await obsWebSocket.send('SetCurrentProgramScene', {'sceneName': sceneName});
+
+  if (responseSwitchScene?.requestStatus.result == true) {
+    print('Cambiado a la escena: $sceneName');
+  } else {
+    print('Error: No se pudo cambiar a la escena $sceneName. Detalles: ${responseSwitchScene?.requestStatus}');
+  }
 }
