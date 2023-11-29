@@ -38,6 +38,8 @@ dependencies:
   shared_preferences: 2.2.2
   chewie: ^1.0.0
   video_player: ^2.2.15
+  obs_websocket: ^5.1.0+4
+   
 
 dev_dependencies:
   flutter_test:
