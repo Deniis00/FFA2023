@@ -1,10 +1,14 @@
+import 'dart:ui';
+
+import 'package:ffa_2023/src/consultas/consulta_api.dart';
 import 'package:flutter/material.dart';
 import 'package:chewie/chewie.dart';
+import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 
 class EntradaPages extends StatefulWidget {
   const EntradaPages({Key? key}) : super(key: key);
-
+  
   @override
   State<EntradaPages> createState() => _EntradaPagesState();
 }
@@ -49,27 +53,46 @@ class _EntradaPagesState extends State<EntradaPages> {
     }
   }
 
-  void handleAcceptButtonPress() {
+  Future<void> handleAcceptButtonPress() async {
     String currentText = _textFieldController.text;
     if (currentText.isEmpty) {
-          mostrarMensaje('Validaciones', "Debe insertar su código de acceso.");
+      showAlertDialog('Validaciones', "Debe insertar su código de acceso.");
+    } else {
+      // Utiliza la clase ConsultaApi para verificar el código de acceso
+      final consultaApi = ConsultaApi();
+      final response = await consultaApi.verificarCodigoAcceso(currentText);
+
+      if (response['success'] == 1) {
+        // Código de acceso válido, maneja la respuesta aquí
+        print('Respuesta de la API: ${response['message']}');
+        print('Datos: ${response['data']}');
+      } else {
+        // Código de acceso no válido, muestra un mensaje de error
+        showAlertDialog('Error', response['message']);
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
+     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            height: MediaQuery.of(context).size.height / 1.5,
+            height: MediaQuery.of(context).size.height / 1.6,
             child: Chewie(controller: _chewieController),
           ),
           Expanded(
             child: Container(
-              color: const Color.fromRGBO(255, 0, 0, 1),
+              decoration: const BoxDecoration(
+                color: Colors.white, //Color(0xFFC3222B),
+                border: Border(
+                  top: BorderSide(color: Colors.black, width: 1.0),
+                ),
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -78,7 +101,7 @@ class _EntradaPagesState extends State<EntradaPages> {
                     child: Container(
                       decoration: const BoxDecoration(
                           border: Border(
-                        right: BorderSide(color: Colors.black, width: 2.0),
+                        right: BorderSide(color: Colors.black, width: 1.0),
                       )),
                       child: Padding(
                         padding: const EdgeInsets.all(4.0),
@@ -89,9 +112,9 @@ class _EntradaPagesState extends State<EntradaPages> {
                           children: [
                             const Text("FFA 2023",
                                 style: TextStyle(
-                                    fontSize: 40.0,
+                                    fontSize: 50.0,
                                     fontWeight: FontWeight.bold)),
-                            const SizedBox(height: 40.0),
+                            const SizedBox(height: 30.0),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: TextFormField(
@@ -101,7 +124,7 @@ class _EntradaPagesState extends State<EntradaPages> {
                                 showCursor: true,
                                 cursorColor: Colors.black, // Color del cursor
                                 style: const TextStyle(
-                                    color: Colors.black, fontSize: 30.0),
+                                    color: Colors.black, fontSize: 20.0),
                                 decoration: InputDecoration(
                                   labelText: 'Ingrese su código de acceso',
                                   fillColor: Colors.white,
@@ -187,15 +210,16 @@ class _EntradaPagesState extends State<EntradaPages> {
 
   Widget buildKeyboardButton(String buttonText) {
     return SizedBox(
-      width: 110.0,
-      height: 90.0,
+      width: 90.0,
+      height: 70.0,
       child: ElevatedButton(
         onPressed: () {
           handleNumericButtonPress(buttonText);
         },
         style: ElevatedButton.styleFrom(
-          foregroundColor: Colors.white, backgroundColor: Colors.grey[600], // Color del texto del botón
-          side: const BorderSide(color: Colors.black87, width: 2.0),
+          foregroundColor: Colors.black,
+          backgroundColor: Colors.white, // Color del texto del botón
+          side: const BorderSide(color: Colors.black87, width: 1.0),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0), // Radio de la esquina
           ), // Borde del botón
@@ -210,15 +234,16 @@ class _EntradaPagesState extends State<EntradaPages> {
 
   Widget buildDeleteButton() {
     return SizedBox(
-      width: 110.0,
-      height: 90.0,
+      width: 90.0,
+      height: 70.0,
       child: ElevatedButton(
         onPressed: () {
           handleDeleteButtonPress();
         },
         style: ElevatedButton.styleFrom(
-          foregroundColor: Colors.white, backgroundColor: Colors.black45, // Color del texto del botón
-          side: const BorderSide(color: Colors.black87, width: 2.0),
+          foregroundColor: Colors.white,
+          backgroundColor: Colors.red, // Color del texto del botón
+          side: const BorderSide(color: Colors.black87, width: 1.0),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0), // Radio de la esquina
           ), // Borde del botón
@@ -233,15 +258,16 @@ class _EntradaPagesState extends State<EntradaPages> {
 
   Widget buildAcceptButton() {
     return SizedBox(
-      width: 110.0,
-      height: 90.0,
+      width: 90.0,
+      height: 70.0,
       child: ElevatedButton(
         onPressed: () {
           handleAcceptButtonPress();
         },
         style: ElevatedButton.styleFrom(
-          foregroundColor: Colors.white, backgroundColor: Colors.green, // Color del texto del botón
-          side: const BorderSide(color: Colors.black87, width: 2.0),
+          foregroundColor: Colors.white,
+          backgroundColor: Colors.green, // Color del texto del botón
+          side: const BorderSide(color: Colors.black87, width: 1.0),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0), // Radio de la esquina
           ), // Borde del botón
@@ -251,45 +277,66 @@ class _EntradaPagesState extends State<EntradaPages> {
     );
   }
 
-void mostrarMensaje(String titulo, String mensaje) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0), // Borde redondeado
-        ),
-         contentPadding: EdgeInsets.zero,
-        title: Container(
-          padding:  EdgeInsets.zero, // Ajusta el padding según tus necesidades
-          color: Colors.grey, // Color de fondo del título
-          child: Text(
-            titulo,
-            textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+  void mostrarMensaje(String titulo, String mensaje) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0), // Borde redondeado
           ),
-        ),
-        content: Text(
-          mensaje,
-          style: const TextStyle(fontSize: 20.0),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(); // Cierra el AlertDialog
-            },
-            child: const Text(
-              'Aceptar',
-              style: TextStyle(color: Colors.green, fontSize: 20.0),
+          contentPadding: EdgeInsets.zero,
+          title: Container(
+            padding: EdgeInsets.zero, // Ajusta el padding según tus necesidades
+            color: Colors.grey, // Color de fondo del título
+            child: Text(
+              titulo,
+              textAlign: TextAlign.center,
+              style:
+                  const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
             ),
           ),
-        ],
-      );
-    },
-  );
-}
+          content: Text(
+            mensaje,
+            style: const TextStyle(fontSize: 20.0),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Cierra el AlertDialog
+              },
+              child: const Text(
+                'Aceptar',
+                style: TextStyle(color: Colors.green, fontSize: 20.0),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
-
-
-
+  void showAlertDialog(String titulo, String mensaje) {
+    showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext context) {
+          return BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: AlertDialog(
+              title: Text(titulo),
+              content: Text(mensaje),
+              actions: [
+                ElevatedButton(
+                    style:
+                        ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Aceptar')),
+              ],
+            ),
+          );
+        });
+  }
 }

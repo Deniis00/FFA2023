@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class FuncionarioController extends Controller
 {
    
-    public function obtener_funcionario_que_llego($cedula_funcionario){
+    public function obtiene_actualiza_funcionario_que_llego($cedula_funcionario){
         try {
            
             $funcionario = Funcionario::where('cedula_funcionario', $cedula_funcionario)
@@ -21,7 +21,7 @@ class FuncionarioController extends Controller
                 return response()->json([
                     'success' => 1,
                     'error' => 0,
-                    'message' => 'Funcionario no encontrado',
+                    'message' => 'Código de acceso inexistente. \n Verifique y vuelva a intentarlo.',
                     'data' => null
                 ]);
             }
@@ -30,7 +30,7 @@ class FuncionarioController extends Controller
                 return response()->json([
                     'success' => 1,
                     'error' => 0,
-                    'message' => 'Funcionario ya registrado',
+                    'message' => 'Código de acceso ya registrado. \n Verifique y vuelva a intentarlo.',
                     'data' => null
                 ]);
             }
@@ -44,7 +44,7 @@ class FuncionarioController extends Controller
             return response()->json([
                 'success' => 1,
                 'error' => 0,
-                'message' => "Consulta con exitos.",
+                'message' => "Consulta con éxito.",
                 'data' => new FuncionarioResource($funcionario)
             ]);
 
@@ -53,7 +53,7 @@ class FuncionarioController extends Controller
                 'success' => 0,
                 'error' => 1,
                 'sin_datos'=> 0,
-                'message' => "Error al obtener funcionario " . $ex->getMessage(),
+                'message' => "Error al verificar código de acceso " . $ex->getMessage(),
                 'data' => null
                 
             ]);

@@ -1,4 +1,4 @@
-name: app_ffa_2023
+name: ffa_2023
 description: FFA 2023.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -39,6 +39,7 @@ dependencies:
   chewie: ^1.0.0
   video_player: ^2.2.15
   obs_websocket: ^5.1.0+4
+  http: ^0.13.3
    
 
 dev_dependencies:

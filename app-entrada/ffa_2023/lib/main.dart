@@ -1,15 +1,15 @@
-import 'package:app_ffa_2023/src/pages/configuraciones_pages.dart';
-import 'package:app_ffa_2023/src/pages/entrada_pages.dart';
-import 'package:app_ffa_2023/src/pages/inicio_page.dart';
-import 'package:app_ffa_2023/src/utils/preferencias_usuario.dart';
+import 'package:ffa_2023/src/pages/configuraciones_pages.dart';
+import 'package:ffa_2023/src/pages/entrada_pages.dart';
+import 'package:ffa_2023/src/pages/inicio_page.dart';
+import 'package:ffa_2023/src/utils/preferencias_usuario.dart';
 import 'package:flutter/material.dart';
 
 
 Future<void> main(List<String> args) async {
    WidgetsFlutterBinding.ensureInitialized();
-  final prefs = new PreferenciasUsuario();
+  final prefs = PreferenciasUsuario();
   await prefs.initPrefs();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -21,7 +21,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final GlobalKey<NavigatorState> navigatorKey =
-      new GlobalKey<NavigatorState>();
+      GlobalKey<NavigatorState>();
 
   @override
   void initState() {

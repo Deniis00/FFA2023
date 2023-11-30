@@ -1,4 +1,4 @@
-import 'package:app_ffa_2023/src/utils/preferencias_usuario.dart';
+import 'package:ffa_2023/src/utils/preferencias_usuario.dart';
 import 'package:flutter/material.dart';
 
 class InicioPage extends StatefulWidget {
@@ -28,7 +28,7 @@ class _InicioPageState extends State<InicioPage> {
     return AppBar(
       title: const Text('FFA 2023'),
       centerTitle: true,
-      backgroundColor: const Color.fromRGBO(255, 0, 0, 1),
+      backgroundColor: const Color(0xFFC3222B),
     );
   }
 

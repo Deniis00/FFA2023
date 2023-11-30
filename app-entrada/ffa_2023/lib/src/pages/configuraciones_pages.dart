@@ -1,4 +1,4 @@
-import 'package:app_ffa_2023/src/utils/preferencias_usuario.dart';
+import 'package:ffa_2023/src/utils/preferencias_usuario.dart';
 import 'package:flutter/material.dart';
 
 class ConfiguracionesPage extends StatefulWidget {
