@@ -1,0 +1,4 @@
+#Wed Nov 29 16:25:29 PYST 2023
+base.0=C\:\\Users\\denis.ayala\\Desktop\\FFA2023\\app-entrada\\app_ffa_2023\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+renamed.0=classes.dex
+path.0=classes.dex

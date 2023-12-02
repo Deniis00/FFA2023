@@ -19,7 +19,7 @@ Partial Class frmSorteadorFFA2022
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim Appearance1 As Infragistics.Win.Appearance = New Infragistics.Win.Appearance()
+        Dim Appearance4 As Infragistics.Win.Appearance = New Infragistics.Win.Appearance()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmSorteadorFFA2022))
         Me.btnSortear = New System.Windows.Forms.Button()
         Me.txtunidad = New System.Windows.Forms.TextBox()
@@ -105,8 +105,10 @@ Partial Class frmSorteadorFFA2022
         'lblcantParticipantes
         '
         Me.lblcantParticipantes.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.lblcantParticipantes.Appearance.BackColor = System.Drawing.Color.White
         Me.lblcantParticipantes.Appearance.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.0!)
         Me.lblcantParticipantes.Appearance.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.lblcantParticipantes.Appearance.Options.UseBackColor = True
         Me.lblcantParticipantes.Appearance.Options.UseFont = True
         Me.lblcantParticipantes.Appearance.Options.UseForeColor = True
         Me.lblcantParticipantes.Location = New System.Drawing.Point(27, 733)
@@ -116,17 +118,17 @@ Partial Class frmSorteadorFFA2022
         '
         'lblNombre
         '
-        Appearance1.FontData.Name = "Tahoma"
-        Appearance1.FontData.SizeInPoints = 36.0!
-        Appearance1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Appearance1.ImageBackgroundOrigin = Infragistics.Win.ImageBackgroundOrigin.Form
-        Appearance1.TextHAlignAsString = "Center"
-        Appearance1.TextVAlignAsString = "Middle"
-        Me.lblNombre.Appearance = Appearance1
+        Appearance4.FontData.Name = "Tahoma"
+        Appearance4.FontData.SizeInPoints = 36.0!
+        Appearance4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Appearance4.ImageBackgroundOrigin = Infragistics.Win.ImageBackgroundOrigin.Form
+        Appearance4.TextHAlignAsString = "Center"
+        Appearance4.TextVAlignAsString = "Middle"
+        Me.lblNombre.Appearance = Appearance4
         Me.lblNombre.AutoEllipsis = False
         Me.lblNombre.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.lblNombre.Font = New System.Drawing.Font("Microsoft Sans Serif", 4.0!, System.Drawing.FontStyle.Bold)
-        Me.lblNombre.Location = New System.Drawing.Point(0, 323)
+        Me.lblNombre.Location = New System.Drawing.Point(0, 299)
         Me.lblNombre.Name = "lblNombre"
         Me.lblNombre.Size = New System.Drawing.Size(1045, 48)
         Me.lblNombre.TabIndex = 14
@@ -134,14 +136,14 @@ Partial Class frmSorteadorFFA2022
         'pnlFoto
         '
         Me.pnlFoto.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.pnlFoto.Appearance.BackColor = System.Drawing.Color.Transparent
+        Me.pnlFoto.Appearance.BackColor = System.Drawing.Color.White
         Me.pnlFoto.Appearance.Options.UseBackColor = True
         Me.pnlFoto.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
         Me.pnlFoto.Controls.Add(Me.lblNombre)
         Me.pnlFoto.Controls.Add(Me.pcFotoFuncionario)
-        Me.pnlFoto.Location = New System.Drawing.Point(27, 212)
+        Me.pnlFoto.Location = New System.Drawing.Point(27, 236)
         Me.pnlFoto.Name = "pnlFoto"
-        Me.pnlFoto.Size = New System.Drawing.Size(1045, 371)
+        Me.pnlFoto.Size = New System.Drawing.Size(1045, 347)
         Me.pnlFoto.TabIndex = 21
         '
         'pcFotoFuncionario
@@ -149,7 +151,7 @@ Partial Class frmSorteadorFFA2022
         Me.pcFotoFuncionario.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.pcFotoFuncionario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.pcFotoFuncionario.Image = CType(resources.GetObject("pcFotoFuncionario.Image"), System.Drawing.Image)
-        Me.pcFotoFuncionario.Location = New System.Drawing.Point(372, 15)
+        Me.pcFotoFuncionario.Location = New System.Drawing.Point(372, 3)
         Me.pcFotoFuncionario.Name = "pcFotoFuncionario"
         Me.pcFotoFuncionario.Size = New System.Drawing.Size(301, 302)
         Me.pcFotoFuncionario.TabIndex = 3

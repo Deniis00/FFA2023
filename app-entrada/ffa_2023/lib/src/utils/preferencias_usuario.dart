@@ -32,4 +32,22 @@ class PreferenciasUsuario {
   set urlWS(String valor) {
     _prefs.setString('urlWS', valor);
   }
+
+  String get passWS {
+    return _prefs.getString('passWS') ??
+        ''; // Devuelve una cadena vacía si es nulo
+  }
+
+  set passWS(String valor) {
+    _prefs.setString('passWS', valor);
+  }
+
+   String get codigoAcceso {
+    return _prefs.getString('codigo_acceso') ??
+        ''; // Devuelve una cadena vacía si es nulo
+  }
+
+  set codigoAcceso(String valor) {
+    _prefs.setString('codigo_acceso', valor);
+  }
 }

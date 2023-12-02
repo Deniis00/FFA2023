@@ -72,7 +72,7 @@ Public Class frmSorteadorFFA2022
 
             sorteado = listSorteo.Item(id)
 
-            Dim num As String = sorteado.Id_funcionario.ToString.PadLeft(4, "0")
+            Dim num As String = sorteado.codigo_funcionario.ToString.PadLeft(4, "0")
 
 
             Me.txtunidad.Text = num.Substring(3, 1)
@@ -125,7 +125,7 @@ Public Class frmSorteadorFFA2022
 
             numeroSorteado = CInt(uni_m + cen + dec + uni)
 
-            Dim sorteado As ListadoSorteoApi = listSorteo.FirstOrDefault(Function(x) x.Id_funcionario = numeroSorteado)
+            Dim sorteado As ListadoSorteoApi = listSorteo.FirstOrDefault(Function(x) x.codigo_funcionario = numeroSorteado)
 
             If sorteado IsNot Nothing Then
                 CargarNombre(sorteado)
@@ -141,7 +141,7 @@ Public Class frmSorteadorFFA2022
 
         '' pcFotoFuncionario.LoadAsync("http://pgs.casanissei.com:180/FotosFuncionariosOficial/" & sorteado.Id_funcionario & ".jpg")
 
-        Dim imagen As Image = My.Resources.ResourceManager.GetObject("_" + sorteado.Id_funcionario.ToString)
+        Dim imagen As Image = My.Resources.ResourceManager.GetObject("_" + sorteado.codigo_funcionario.ToString)
 
         pcFotoFuncionario.Image = imagen
         pcFotoFuncionario.SizeMode = PictureBoxSizeMode.StretchImage

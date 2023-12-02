@@ -20,3 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/obtiene_actualiza_funcionario_que_llego/{cedula_funcionario}',[FuncionarioController::class,'obtiene_actualiza_funcionario_que_llego']);
 Route::get('/funcionarios_para_sorteo',[FuncionarioController::class,'funcionarios_para_sorteo']);
 
+Route::get('/obtener_funcionarios_sin_registrar',[FuncionarioController::class,'funcionarios_aun_sin_registrar']);
+Route::get('/registrar_funcionario/{id}',[FuncionarioController::class,'funcionario_registro_llegada']);
+
+

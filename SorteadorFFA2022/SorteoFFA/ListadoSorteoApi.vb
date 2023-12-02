@@ -16,13 +16,13 @@ Public Class ListadoSorteoApi
         End Set
     End Property
 
-    Private _id_funcionario As Integer
-    Public Property Id_funcionario() As Integer
+    Private _codigo_funcionario As Integer
+    Public Property codigo_funcionario() As Integer
         Get
-            Return _id_funcionario
+            Return _codigo_funcionario
         End Get
         Set(ByVal value As Integer)
-            _id_funcionario = value
+            _codigo_funcionario = value
         End Set
     End Property
 

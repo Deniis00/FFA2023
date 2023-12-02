@@ -1,22 +1,33 @@
 import 'dart:ui';
 
 import 'package:ffa_2023/src/consultas/consulta_api.dart';
+import 'package:ffa_2023/src/utils/preferencias_usuario.dart';
 import 'package:flutter/material.dart';
 import 'package:chewie/chewie.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:video_player/video_player.dart';
 
 class EntradaPages extends StatefulWidget {
   const EntradaPages({Key? key}) : super(key: key);
-  
+
   @override
   State<EntradaPages> createState() => _EntradaPagesState();
 }
 
-class _EntradaPagesState extends State<EntradaPages> {
+class _EntradaPagesState extends State<EntradaPages> with RouteAware {
   late VideoPlayerController _videoPlayerController;
   late ChewieController _chewieController;
   final TextEditingController _textFieldController = TextEditingController();
+  final _codigoAccesoFocusNode = FocusNode();
+  final pref = PreferenciasUsuario();
+
+  @override
+  void didPopNext() {
+    // La ruta 'mire_pantalla' se quitó de la pila, puedes reanudar la reproducción aquí
+    _videoPlayerController.seekTo(const Duration(seconds: 0));
+    _videoPlayerController.play();
+  }
 
   @override
   void initState() {
@@ -53,29 +64,50 @@ class _EntradaPagesState extends State<EntradaPages> {
     }
   }
 
-  Future<void> handleAcceptButtonPress() async {
-    String currentText = _textFieldController.text;
-    if (currentText.isEmpty) {
+  Future<void> realizaConsulta(
+      String codigoAcceso, BuildContext context) async {
+    // Utiliza la clase ConsultaApi para verificar el código de acceso
+    final consultaApi = ConsultaApi();
+    final response = await consultaApi.verificarCodigoAcceso(codigoAcceso);
+
+    if (response['success'] == 1) {
+      if (response['data'] == null) {
+        EasyLoading.dismiss();
+        await showAlertDialog2('Atención!!', response['message']);
+      } else {
+        EasyLoading.dismiss();
+        Map<String, dynamic> data = response["data"];
+
+        String codigoAcceso = data["cedula_funcionario"];
+        pref.codigoAcceso = codigoAcceso;
+       
+
+        // ignore: use_build_context_synchronously
+        await Navigator.pushNamed(context, 'mire_pantalla');
+        _videoPlayerController.play();
+      }
+    } else {
+      EasyLoading.dismiss();
+      await showAlertDialog2('Atención!!', response['message']);
+    }
+  }
+
+  Future<void> handleAcceptButtonPress(BuildContext context) async {
+    String codigoAcceso = _textFieldController.text;
+    if (codigoAcceso.isEmpty) {
       showAlertDialog('Validaciones', "Debe insertar su código de acceso.");
     } else {
-      // Utiliza la clase ConsultaApi para verificar el código de acceso
-      final consultaApi = ConsultaApi();
-      final response = await consultaApi.verificarCodigoAcceso(currentText);
+      EasyLoading.show(status: "Cargando..");
+      await realizaConsulta(codigoAcceso, context);
 
-      if (response['success'] == 1) {
-        // Código de acceso válido, maneja la respuesta aquí
-        print('Respuesta de la API: ${response['message']}');
-        print('Datos: ${response['data']}');
-      } else {
-        // Código de acceso no válido, muestra un mensaje de error
-        showAlertDialog('Error', response['message']);
-      }
+      _textFieldController.clear();
+      _codigoAccesoFocusNode.requestFocus();
     }
   }
 
   @override
   Widget build(BuildContext context) {
-     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -110,14 +142,20 @@ class _EntradaPagesState extends State<EntradaPages> {
                               .center, // Alineación vertical al centro
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            const Text("FFA 2023",
-                                style: TextStyle(
-                                    fontSize: 50.0,
-                                    fontWeight: FontWeight.bold)),
-                            const SizedBox(height: 30.0),
+                            const SizedBox(height: 20.0),
+                            const Text(
+                              'Inserte su código de acceso',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 17.0,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.only(
+                                  bottom: 8.0, left: 8.0, right: 8.0),
                               child: TextFormField(
+                                focusNode: _codigoAccesoFocusNode,
                                 controller: _textFieldController,
                                 readOnly: true,
                                 inputFormatters: [],
@@ -126,11 +164,23 @@ class _EntradaPagesState extends State<EntradaPages> {
                                 style: const TextStyle(
                                     color: Colors.black, fontSize: 20.0),
                                 decoration: InputDecoration(
-                                  labelText: 'Ingrese su código de acceso',
+                                  labelText:
+                                      null, //'Ingrese su código de acceso',
                                   fillColor: Colors.white,
                                   filled: true,
                                   labelStyle:
                                       const TextStyle(color: Colors.black),
+                                  //contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
+                                  enabledBorder: const UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors
+                                            .grey), // Color de la línea inferior cuando no está enfocado
+                                  ),
+                                  focusedBorder: const UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors
+                                            .grey), // Color de la línea inferior cuando está enfocado
+                                  ),
                                   suffixIcon: IconButton(
                                     onPressed: () {
                                       _textFieldController.clear();
@@ -143,11 +193,16 @@ class _EntradaPagesState extends State<EntradaPages> {
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 30.0),
-                            const Text("BIENVENIDO",
-                                style: TextStyle(
-                                    fontSize: 40.0,
-                                    fontWeight: FontWeight.bold))
+                            const SizedBox(height: 60.0),
+                            Container(
+                              decoration: const BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage("assets/img/logo.png"),
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
+                              height: 100,
+                            )
                           ],
                         ),
                       ),
@@ -192,7 +247,7 @@ class _EntradaPagesState extends State<EntradaPages> {
                             children: [
                               buildDeleteButton(),
                               buildKeyboardButton('0'),
-                              buildAcceptButton(),
+                              buildAcceptButton(context),
                             ],
                           ),
                         ],
@@ -256,13 +311,13 @@ class _EntradaPagesState extends State<EntradaPages> {
     );
   }
 
-  Widget buildAcceptButton() {
+  Widget buildAcceptButton(BuildContext context) {
     return SizedBox(
       width: 90.0,
       height: 70.0,
       child: ElevatedButton(
         onPressed: () {
-          handleAcceptButtonPress();
+          handleAcceptButtonPress(context);
         },
         style: ElevatedButton.styleFrom(
           foregroundColor: Colors.white,
@@ -338,5 +393,28 @@ class _EntradaPagesState extends State<EntradaPages> {
             ),
           );
         });
+  }
+
+  Future<void> showAlertDialog2(String title, String message) async {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            title,
+            style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+          ),
+          content: Text(message),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Cierra el AlertDialog
+              },
+              child: const Text('Aceptar'),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

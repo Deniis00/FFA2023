@@ -92,7 +92,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("http://10.10.41.36/api/funcionarios_para_sorteo")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute(" http://10.10.20.58:8080/api/funcionarios_para_sorteo")>  _
         Public Property apiurlObtenerListado() As String
             Get
                 Return CType(Me("apiurlObtenerListado"),String)

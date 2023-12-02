@@ -12,7 +12,7 @@
       <Value Profile="(Default)">X:\2011_FONDO.jpg</Value>
     </Setting>
     <Setting Name="apiurlObtenerListado" Type="System.String" Scope="User">
-      <Value Profile="(Default)">http://10.10.41.36/api/funcionarios_para_sorteo</Value>
+      <Value Profile="(Default)"> http://10.10.20.58:8080/api/funcionarios_para_sorteo</Value>
     </Setting>
   </Settings>
 </SettingsFile>

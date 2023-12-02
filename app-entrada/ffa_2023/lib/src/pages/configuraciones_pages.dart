@@ -12,6 +12,7 @@ class _ConfiguracionesPageState extends State<ConfiguracionesPage> {
   final pref = PreferenciasUsuario();
   final _urlApi = TextEditingController();
   final _urlWS = TextEditingController();
+  final _passWS = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,14 @@ class _ConfiguracionesPageState extends State<ConfiguracionesPage> {
       _urlApi.text = pref.apiUrl;
     }
 
-    _urlWS.text = pref.urlWS;
+    if (pref.urlWS == "") {
+      _urlWS.text = " ws://";
+    } else {
+      _urlWS.text = pref.urlWS;
+    }
+
+
+    _passWS.text = pref.passWS;
 
     return WillPopScope(
         child: Scaffold(
@@ -40,7 +48,7 @@ class _ConfiguracionesPageState extends State<ConfiguracionesPage> {
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
       centerTitle: true,
-      backgroundColor: const Color.fromRGBO(255, 0, 0, 1),
+      backgroundColor: const Color(0xFFC3222B),
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: () {
@@ -71,7 +79,7 @@ class _ConfiguracionesPageState extends State<ConfiguracionesPage> {
                   controller: _urlApi,
                   onSubmitted: (value) => {pref.apiUrl = value}),
               const SizedBox(
-                height: 100.0,
+                height: 50.0,
               ),
               const Text("Ingrese el URL del WS:",
                   style:
@@ -79,7 +87,17 @@ class _ConfiguracionesPageState extends State<ConfiguracionesPage> {
               TextField(
                   autofocus: true,
                   controller: _urlWS,
-                  onSubmitted: (value) => {pref.urlWS = value})
+                  onSubmitted: (value) => {pref.urlWS = value}),
+                   const SizedBox(
+                height: 50.0,
+              ),
+              const Text("Ingrese la contraseña del WS:",
+                  style:
+                      TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
+              TextField(
+                  autofocus: true,
+                  controller: _passWS,
+                  onSubmitted: (value) => {pref.passWS = value})
             ],
           ),
         ),
