@@ -63,6 +63,29 @@ Public Class ListadoSorteoApi
         Return retorno
     End Function
 
+    Public Shared Sub actualizarSorteado(sorteado As ListadoSorteoApi)
+        Dim retorno As New BindingList(Of ListadoSorteoApi)
+
+        Try
+            Dim urlEndpoint = My.MySettings.Default.apiurlActualizaSorteado + sorteado.Id.ToString
+            Dim client = New RestClient(urlEndpoint)
+            client.Timeout = -1
+            Dim request = New RestRequest(Method.GET)
+
+            Dim response As IRestResponse = client.Execute(request)
+
+            ' Dim resultAPi As Root = JsonConvert.DeserializeObject(Of Root)(response.Content)
+
+
+            'retorno = resultAPi.data
+
+        Catch ex As Exception
+            XtraMessageBox.Show("Error al obtener listado de sorteo" & vbNewLine & "Motivo : " & ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+
+
+    End Sub
+
 #End Region
 
 

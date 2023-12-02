@@ -57,53 +57,46 @@ Public Class frmSorteadorFFA2022
         Dim id As Integer = 0
         Dim sorteado As New ListadoSorteoApi
 
-        While Me.btnSortear.Text = "&Detener"
+        If listSorteo.Count > 0 Then
+            While Me.btnSortear.Text = "&Detener"
+
+                numeroSorteado = 0
+
+                id = random.Next(0, listSorteo.Count - 1)
+
+                sorteado = listSorteo.Item(id)
+
+                Dim num As String = sorteado.codigo_funcionario.ToString.PadLeft(4, "0")
 
 
-            numeroSorteado = 0
-
-            'Dim uni As String = random.Next(0, 10)
-            'Dim dec As String = random.Next(0, 10)
-            'Dim cen As String = random.Next(0, 10)
-            'Dim uni_m As String = random.Next(0, 9)
-
-
-            id = random.Next(0, listSorteo.Count - 1)
-
-            sorteado = listSorteo.Item(id)
-
-            Dim num As String = sorteado.codigo_funcionario.ToString.PadLeft(4, "0")
-
-
-            Me.txtunidad.Text = num.Substring(3, 1)
-            Me.txtdecena.Text = num.Substring(2, 1)
-            Me.txtcentena.Text = num.Substring(1, 1)
-            Me.txtunidadMil.Text = num.Substring(0, 1)
+                Me.txtunidad.Text = num.Substring(3, 1)
+                Me.txtdecena.Text = num.Substring(2, 1)
+                Me.txtcentena.Text = num.Substring(1, 1)
+                Me.txtunidadMil.Text = num.Substring(0, 1)
 
 
 
-        End While
+            End While
 
 
+            If sorteado IsNot Nothing Then
+                CargarNombre(sorteado)
+                listSorteado.Add(sorteado)
+                listSorteo.Remove(sorteado)
+                lblcantParticipantes.Text = listSorteo.Count.ToString + " participantes"
+                ListadoSorteoApi.actualizarSorteado(sorteado)
+                listSorteo.Clear()
+                listSorteo = ListadoSorteoApi.obtenerListaSorteo()
+
+            Else
+                Me.btnSortear.Text = "&Detener"
+                volverASortear()
+
+            End If
 
 
-
-
-        ''Dim sorteado As ListadoSorteoApi = listSorteo.FirstOrDefault(Function(x) x.Id_funcionario = numeroSorteado)
-
-        If sorteado IsNot Nothing Then
-            CargarNombre(sorteado)
-            listSorteado.Add(sorteado)
-            listSorteo.Remove(sorteado)
-            lblcantParticipantes.Text = listSorteo.Count.ToString + " participantes"
-        Else
-            Me.btnSortear.Text = "&Detener"
-            volverASortear()
 
         End If
-
-
-
 
 
 
@@ -113,7 +106,7 @@ Public Class frmSorteadorFFA2022
     Private Sub volverASortear()
         While Me.btnSortear.Text = "&Detener"
             numeroSorteado = 0
-            Dim uni As String = random.Next(0, 10) ''CInt(Math.Floor((upperbound - lowerbound + 1) * Rnd())) + lowerbound
+            Dim uni As String = random.Next(0, 10)
             Dim dec As String = random.Next(0, 10)
             Dim cen As String = random.Next(0, 10)
             Dim uni_m As String = random.Next(0, 9)
@@ -133,27 +126,23 @@ Public Class frmSorteadorFFA2022
                 listSorteo.Remove(sorteado)
                 Me.btnSortear.Text = "&Sortear"
                 lblcantParticipantes.Text = listSorteo.Count.ToString + " participantes"
+                ListadoSorteoApi.actualizarSorteado(sorteado)
+                listSorteo.Clear()
+                listSorteo = ListadoSorteoApi.obtenerListaSorteo()
             End If
         End While
     End Sub
 
     Private Sub CargarNombre(sorteado As ListadoSorteoApi)
 
-        '' pcFotoFuncionario.LoadAsync("http://pgs.casanissei.com:180/FotosFuncionariosOficial/" & sorteado.Id_funcionario & ".jpg")
 
         Dim imagen As Image = My.Resources.ResourceManager.GetObject("_" + sorteado.codigo_funcionario.ToString)
 
         pcFotoFuncionario.Image = imagen
         pcFotoFuncionario.SizeMode = PictureBoxSizeMode.StretchImage
-
-        '' pcFotoFuncionario.Load =My.Resources._2364
         lblNombre.Text = sorteado.Nombre_funcionario
-
-
-
         pcFotoFuncionario.Visible = True
         lblNombre.Visible = True
-        '  pnlFoto.Visible = True
         mostrarRandom(False)
     End Sub
 

@@ -19,7 +19,7 @@ Partial Class frmSorteadorFFA2022
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim Appearance4 As Infragistics.Win.Appearance = New Infragistics.Win.Appearance()
+        Dim Appearance1 As Infragistics.Win.Appearance = New Infragistics.Win.Appearance()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmSorteadorFFA2022))
         Me.btnSortear = New System.Windows.Forms.Button()
         Me.txtunidad = New System.Windows.Forms.TextBox()
@@ -43,7 +43,7 @@ Partial Class frmSorteadorFFA2022
         Me.btnSortear.BackColor = System.Drawing.Color.Transparent
         Me.btnSortear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSortear.ForeColor = System.Drawing.SystemColors.ActiveCaption
-        Me.btnSortear.Location = New System.Drawing.Point(510, 737)
+        Me.btnSortear.Location = New System.Drawing.Point(510, 747)
         Me.btnSortear.Name = "btnSortear"
         Me.btnSortear.Size = New System.Drawing.Size(75, 23)
         Me.btnSortear.TabIndex = 2
@@ -55,10 +55,10 @@ Partial Class frmSorteadorFFA2022
         Me.txtunidad.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.txtunidad.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtunidad.Cursor = System.Windows.Forms.Cursors.No
-        Me.txtunidad.Font = New System.Drawing.Font("Microsoft Sans Serif", 50.0!, System.Drawing.FontStyle.Bold)
-        Me.txtunidad.Location = New System.Drawing.Point(596, 653)
+        Me.txtunidad.Font = New System.Drawing.Font("Microsoft Sans Serif", 75.0!, System.Drawing.FontStyle.Bold)
+        Me.txtunidad.Location = New System.Drawing.Point(595, 634)
         Me.txtunidad.Name = "txtunidad"
-        Me.txtunidad.Size = New System.Drawing.Size(49, 76)
+        Me.txtunidad.Size = New System.Drawing.Size(52, 114)
         Me.txtunidad.TabIndex = 15
         Me.txtunidad.Text = "0"
         Me.txtunidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -68,10 +68,10 @@ Partial Class frmSorteadorFFA2022
         Me.txtdecena.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.txtdecena.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtdecena.Cursor = System.Windows.Forms.Cursors.Help
-        Me.txtdecena.Font = New System.Drawing.Font("Microsoft Sans Serif", 50.0!, System.Drawing.FontStyle.Bold)
-        Me.txtdecena.Location = New System.Drawing.Point(547, 653)
+        Me.txtdecena.Font = New System.Drawing.Font("Microsoft Sans Serif", 75.0!, System.Drawing.FontStyle.Bold)
+        Me.txtdecena.Location = New System.Drawing.Point(546, 634)
         Me.txtdecena.Name = "txtdecena"
-        Me.txtdecena.Size = New System.Drawing.Size(49, 76)
+        Me.txtdecena.Size = New System.Drawing.Size(52, 114)
         Me.txtdecena.TabIndex = 16
         Me.txtdecena.Text = "0"
         Me.txtdecena.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -81,10 +81,10 @@ Partial Class frmSorteadorFFA2022
         Me.txtunidadMil.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.txtunidadMil.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtunidadMil.Cursor = System.Windows.Forms.Cursors.WaitCursor
-        Me.txtunidadMil.Font = New System.Drawing.Font("Microsoft Sans Serif", 50.0!, System.Drawing.FontStyle.Bold)
-        Me.txtunidadMil.Location = New System.Drawing.Point(449, 653)
+        Me.txtunidadMil.Font = New System.Drawing.Font("Microsoft Sans Serif", 75.0!, System.Drawing.FontStyle.Bold)
+        Me.txtunidadMil.Location = New System.Drawing.Point(448, 634)
         Me.txtunidadMil.Name = "txtunidadMil"
-        Me.txtunidadMil.Size = New System.Drawing.Size(49, 76)
+        Me.txtunidadMil.Size = New System.Drawing.Size(52, 114)
         Me.txtunidadMil.TabIndex = 18
         Me.txtunidadMil.Text = "0"
         Me.txtunidadMil.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -94,10 +94,10 @@ Partial Class frmSorteadorFFA2022
         Me.txtcentena.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.txtcentena.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtcentena.Cursor = System.Windows.Forms.Cursors.WaitCursor
-        Me.txtcentena.Font = New System.Drawing.Font("Microsoft Sans Serif", 50.0!, System.Drawing.FontStyle.Bold)
-        Me.txtcentena.Location = New System.Drawing.Point(498, 653)
+        Me.txtcentena.Font = New System.Drawing.Font("Microsoft Sans Serif", 75.0!, System.Drawing.FontStyle.Bold)
+        Me.txtcentena.Location = New System.Drawing.Point(497, 634)
         Me.txtcentena.Name = "txtcentena"
-        Me.txtcentena.Size = New System.Drawing.Size(49, 76)
+        Me.txtcentena.Size = New System.Drawing.Size(52, 114)
         Me.txtcentena.TabIndex = 17
         Me.txtcentena.Text = "0"
         Me.txtcentena.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -118,13 +118,13 @@ Partial Class frmSorteadorFFA2022
         '
         'lblNombre
         '
-        Appearance4.FontData.Name = "Tahoma"
-        Appearance4.FontData.SizeInPoints = 36.0!
-        Appearance4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Appearance4.ImageBackgroundOrigin = Infragistics.Win.ImageBackgroundOrigin.Form
-        Appearance4.TextHAlignAsString = "Center"
-        Appearance4.TextVAlignAsString = "Middle"
-        Me.lblNombre.Appearance = Appearance4
+        Appearance1.FontData.Name = "Tahoma"
+        Appearance1.FontData.SizeInPoints = 36.0!
+        Appearance1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Appearance1.ImageBackgroundOrigin = Infragistics.Win.ImageBackgroundOrigin.Form
+        Appearance1.TextHAlignAsString = "Center"
+        Appearance1.TextVAlignAsString = "Middle"
+        Me.lblNombre.Appearance = Appearance1
         Me.lblNombre.AutoEllipsis = False
         Me.lblNombre.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.lblNombre.Font = New System.Drawing.Font("Microsoft Sans Serif", 4.0!, System.Drawing.FontStyle.Bold)
@@ -153,7 +153,7 @@ Partial Class frmSorteadorFFA2022
         Me.pcFotoFuncionario.Image = CType(resources.GetObject("pcFotoFuncionario.Image"), System.Drawing.Image)
         Me.pcFotoFuncionario.Location = New System.Drawing.Point(372, 3)
         Me.pcFotoFuncionario.Name = "pcFotoFuncionario"
-        Me.pcFotoFuncionario.Size = New System.Drawing.Size(301, 302)
+        Me.pcFotoFuncionario.Size = New System.Drawing.Size(301, 279)
         Me.pcFotoFuncionario.TabIndex = 3
         Me.pcFotoFuncionario.TabStop = False
         '

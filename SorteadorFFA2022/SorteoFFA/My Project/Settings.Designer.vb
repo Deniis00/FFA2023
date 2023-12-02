@@ -92,13 +92,25 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute(" http://10.10.20.58:8080/api/funcionarios_para_sorteo")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("http://10.10.20.58:8080/api/funcionarios_para_sorteo")>  _
         Public Property apiurlObtenerListado() As String
             Get
                 Return CType(Me("apiurlObtenerListado"),String)
             End Get
             Set
                 Me("apiurlObtenerListado") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("http://127.0.0.1:8000/api/registrar_sorteado/")>  _
+        Public Property apiurlActualizaSorteado() As String
+            Get
+                Return CType(Me("apiurlActualizaSorteado"),String)
+            End Get
+            Set
+                Me("apiurlActualizaSorteado") = value
             End Set
         End Property
     End Class
