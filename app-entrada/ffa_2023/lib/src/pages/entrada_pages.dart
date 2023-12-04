@@ -114,7 +114,7 @@ class _EntradaPagesState extends State<EntradaPages> with RouteAware {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            height: MediaQuery.of(context).size.height / 1.6,
+            height: MediaQuery.of(context).size.height / 1.7,
             child: Chewie(controller: _chewieController),
           ),
           Expanded(
@@ -129,8 +129,10 @@ class _EntradaPagesState extends State<EntradaPages> with RouteAware {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Expanded(
-                    child: Container(
+                    SizedBox(
+                      width: 250,
+                      child:   /*Expanded(
+                    child:*/ Container(
                       decoration: const BoxDecoration(
                           border: Border(
                         right: BorderSide(color: Colors.black, width: 1.0),
@@ -144,7 +146,7 @@ class _EntradaPagesState extends State<EntradaPages> with RouteAware {
                           children: [
                             const SizedBox(height: 20.0),
                             const Text(
-                              'Inserte su código de acceso',
+                              'Ingrese su código de acceso',
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 17.0,
@@ -208,7 +210,9 @@ class _EntradaPagesState extends State<EntradaPages> with RouteAware {
                       ),
                     ),
                   ),
-                  Expanded(
+                  
+                  //  ),
+                Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(4.0),
                       child: Column(
@@ -265,8 +269,8 @@ class _EntradaPagesState extends State<EntradaPages> with RouteAware {
 
   Widget buildKeyboardButton(String buttonText) {
     return SizedBox(
-      width: 90.0,
-      height: 70.0,
+      width: 110.0,
+      height: 90.0,
       child: ElevatedButton(
         onPressed: () {
           handleNumericButtonPress(buttonText);
@@ -281,7 +285,7 @@ class _EntradaPagesState extends State<EntradaPages> with RouteAware {
         ),
         child: Text(
           buttonText,
-          style: const TextStyle(fontSize: 50.0),
+          style: const TextStyle(fontSize:  80.0),
         ),
       ),
     );
@@ -289,8 +293,8 @@ class _EntradaPagesState extends State<EntradaPages> with RouteAware {
 
   Widget buildDeleteButton() {
     return SizedBox(
-      width: 90.0,
-      height: 70.0,
+      width: 110.0,
+      height: 90.0,
       child: ElevatedButton(
         onPressed: () {
           handleDeleteButtonPress();
@@ -305,7 +309,7 @@ class _EntradaPagesState extends State<EntradaPages> with RouteAware {
         ),
         child: const Text(
           "x",
-          style: TextStyle(fontSize: 50.0),
+          style: TextStyle(fontSize:  80.0),
         ),
       ),
     );
@@ -313,8 +317,8 @@ class _EntradaPagesState extends State<EntradaPages> with RouteAware {
 
   Widget buildAcceptButton(BuildContext context) {
     return SizedBox(
-      width: 90.0,
-      height: 70.0,
+       width: 110.0,
+      height: 90.0,
       child: ElevatedButton(
         onPressed: () {
           handleAcceptButtonPress(context);
@@ -327,7 +331,7 @@ class _EntradaPagesState extends State<EntradaPages> with RouteAware {
             borderRadius: BorderRadius.circular(15.0), // Radio de la esquina
           ), // Borde del botón
         ),
-        child: const Icon(Icons.check, size: 50.0),
+        child: const Icon(Icons.check, size: 80.0),
       ),
     );
   }
