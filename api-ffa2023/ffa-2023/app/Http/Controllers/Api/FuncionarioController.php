@@ -95,7 +95,7 @@ class FuncionarioController extends Controller
            
             $funcionarios = Funcionario::where('participa_sorteo', 1)
                                         ->where('registro_entrada', 1)
-                                        ->where('hora_llegada','<=','22:30:00')->get();
+                                        ->where('hora_llegada','<=','20:00:00')->get();
 
             return FuncionarioResource::collection($funcionarios);
 
@@ -110,6 +110,29 @@ class FuncionarioController extends Controller
             ]);
         }
     }
+
+    public function funcionarios_para_sorteo2()
+    {
+
+        try {
+           
+            $funcionarios = Funcionario::where('participa_sorteo2', 1)
+                                        ->where('registro_entrada2', 1)->get();
+
+            return FuncionarioResource::collection($funcionarios);
+
+        } catch (\Exception $ex) {
+            return response()->json([
+                'success' => 0,
+                'error' => 1,
+                'sin_datos'=> 0,
+                'message' => "Error al obtener funcionarios para sorteo" . $ex->getMessage(),
+                'data' => null
+                
+            ]);
+        }
+    }
+
 
     public function funcionario_registro_llegada($id)
     {
@@ -142,5 +165,64 @@ class FuncionarioController extends Controller
             ]);
         }
     }
+    
+    public function registrar_sorteado($id)
+    {
+        try {
+            $funcionario = Funcionario::where('id',$id)->first();
 
+            $funcionario->sorteado = 1;
+
+            $funcionario->update();
+            
+            
+            return response()->json([
+                'data' => [
+                    'id' => $funcionario -> id,
+                    'cedula_funcionario' => $funcionario ->cedula_funcionario,
+                    'nombre_funcionario' => $funcionario->nombre_funcionario,
+                    'codigo_funcionario' => $funcionario->codigo_funcionario,
+                ],
+            ]);
+        } catch (\Exception $ex) {
+            return response()->json([
+                'success' => 0,
+                'error' => 1,
+                'sin_datos'=> 0,
+                'message' => "Error al obtener funcionarios para sorteo" . $ex->getMessage(),
+                'data' => null
+                
+            ]);
+        }
+    }
+
+    public function registrar_sorteado2($id)
+    {
+        try {
+            $funcionario = Funcionario::where('id',$id)->first();
+
+            $funcionario->sorteado2 = 1;
+
+            $funcionario->update();
+            
+            
+            return response()->json([
+                'data' => [
+                    'id' => $funcionario -> id,
+                    'cedula_funcionario' => $funcionario ->cedula_funcionario,
+                    'nombre_funcionario' => $funcionario->nombre_funcionario,
+                    'codigo_funcionario' => $funcionario->codigo_funcionario,
+                ],
+            ]);
+        } catch (\Exception $ex) {
+            return response()->json([
+                'success' => 0,
+                'error' => 1,
+                'sin_datos'=> 0,
+                'message' => "Error al obtener funcionarios para sorteo" . $ex->getMessage(),
+                'data' => null
+                
+            ]);
+        }
+    }
 }
