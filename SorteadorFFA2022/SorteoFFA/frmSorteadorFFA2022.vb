@@ -62,7 +62,7 @@ Public Class frmSorteadorFFA2022
 
                 numeroSorteado = 0
 
-                id = random.Next(0, listSorteo.Count - 1)
+                id = random.Next(0, IIf(listSorteo.Count > 0, listSorteo.Count - 1, 0))
 
                 sorteado = listSorteo.Item(id)
 
@@ -85,8 +85,8 @@ Public Class frmSorteadorFFA2022
                 listSorteo.Remove(sorteado)
                 lblcantParticipantes.Text = listSorteo.Count.ToString + " participantes"
                 ListadoSorteoApi.actualizarSorteado(sorteado)
-                listSorteo.Clear()
-                listSorteo = ListadoSorteoApi.obtenerListaSorteo()
+                'listSorteo.Clear()
+                'listSorteo = ListadoSorteoApi.obtenerListaSorteo()
 
             Else
                 Me.btnSortear.Text = "&Detener"
@@ -126,8 +126,8 @@ Public Class frmSorteadorFFA2022
                 listSorteo.Remove(sorteado)
                 Me.btnSortear.Text = "&Sortear"
                 lblcantParticipantes.Text = listSorteo.Count.ToString + " participantes"
-                ListadoSorteoApi.actualizarSorteado(sorteado)
-                listSorteo.Clear()
+                ' ListadoSorteoApi.actualizarSorteado(sorteado)
+                'listSorteo.Clear()
                 listSorteo = ListadoSorteoApi.obtenerListaSorteo()
             End If
         End While

@@ -24,7 +24,7 @@
     <OptionExplicit>On</OptionExplicit>
     <OptionStrict>Off</OptionStrict>
     <RootNamespace>SorteoFFA2022</RootNamespace>
-    <StartupObject>Sub Main</StartupObject>
+    <StartupObject>SorteoFFA2022.frmPrincipal</StartupObject>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <MyType>WindowsFormsWithCustomSubMain</MyType>
@@ -177,6 +177,12 @@
     <Compile Include="frmFoto.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmPrincipal.Designer.vb">
+      <DependentUpon>frmPrincipal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrincipal.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmSorteadorFFA2022.Designer.vb">
       <DependentUpon>frmSorteadorFFA2022.vb</DependentUpon>
     </Compile>
@@ -209,6 +215,9 @@
     <EmbeddedResource Include="frmFoto.resx">
       <SubType>Designer</SubType>
       <DependentUpon>frmFoto.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrincipal.resx">
+      <DependentUpon>frmPrincipal.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSorteadorFFA2022.resx">
       <DependentUpon>frmSorteadorFFA2022.vb</DependentUpon>
