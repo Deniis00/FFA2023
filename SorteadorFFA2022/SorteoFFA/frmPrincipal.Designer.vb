@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmPrincipal
     Inherits DevExpress.XtraEditors.XtraForm
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         If disposing AndAlso components IsNot Nothing Then
             components.Dispose()
@@ -17,7 +17,7 @@ Partial Class frmPrincipal
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.btnSorteo1 = New DevExpress.XtraEditors.SimpleButton()
         Me.btnSorteo2 = New DevExpress.XtraEditors.SimpleButton()
@@ -25,19 +25,19 @@ Partial Class frmPrincipal
         '
         'btnSorteo1
         '
-        Me.btnSorteo1.Location = New System.Drawing.Point(105, 97)
+        Me.btnSorteo1.Location = New System.Drawing.Point(98, 97)
         Me.btnSorteo1.Name = "btnSorteo1"
-        Me.btnSorteo1.Size = New System.Drawing.Size(75, 23)
+        Me.btnSorteo1.Size = New System.Drawing.Size(89, 23)
         Me.btnSorteo1.TabIndex = 0
-        Me.btnSorteo1.Text = "Sorteo 1"
+        Me.btnSorteo1.Text = "Sorteo Entrada"
         '
         'btnSorteo2
         '
-        Me.btnSorteo2.Location = New System.Drawing.Point(105, 141)
+        Me.btnSorteo2.Location = New System.Drawing.Point(98, 141)
         Me.btnSorteo2.Name = "btnSorteo2"
-        Me.btnSorteo2.Size = New System.Drawing.Size(75, 23)
+        Me.btnSorteo2.Size = New System.Drawing.Size(89, 23)
         Me.btnSorteo2.TabIndex = 1
-        Me.btnSorteo2.Text = "Sorteo 2"
+        Me.btnSorteo2.Text = "Sorteo Principal"
         '
         'frmPrincipal
         '

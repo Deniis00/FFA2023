@@ -1,9 +1,5 @@
 -- ffa2023.funcionarios definition
 
--- ffa2023.funcionarios definition
-
--- ffa2023.funcionarios definition
-
 CREATE TABLE `funcionarios` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `nombre_funcionario` varchar(255) NOT NULL,
@@ -17,7 +13,6 @@ CREATE TABLE `funcionarios` (
   `sorteado` bigint DEFAULT '0',
   `fecha_hora_sorteado` datetime DEFAULT NULL,
   `participa_sorteo2` tinyint DEFAULT '1',
-  `registro_entrada2` bigint DEFAULT '0',
   `sorteado2` bigint DEFAULT '0',
   `fecha_hora_sorteado2` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)

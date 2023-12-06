@@ -17,5 +17,8 @@
     <Setting Name="apiurlActualizaSorteado" Type="System.String" Scope="User">
       <Value Profile="(Default)">http://127.0.0.1:8000/api/registrar_sorteado/</Value>
     </Setting>
+    <Setting Name="endpintBase" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://10.10.40.177/api/</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -40,12 +40,20 @@ Public Class ListadoSorteoApi
 
 
 #Region "-Métodos-"
-    Public Shared Function obtenerListaSorteo() As BindingList(Of ListadoSorteoApi)
+    Public Shared Function obtenerListaSorteo(tipoSorteo As Integer) As BindingList(Of ListadoSorteoApi)
         Dim retorno As New BindingList(Of ListadoSorteoApi)
 
         Try
 
-            Dim client = New RestClient(My.MySettings.Default.apiurlObtenerListado.ToString)
+            Dim endpointStr As String = ""
+
+            If tipoSorteo = 1 Then
+                endpointStr = "funcionarios_para_sorteo"
+            Else
+                endpointStr = "funcionarios_para_sorteo2"
+            End If
+
+            Dim client = New RestClient(My.MySettings.Default.endpintBase.ToString + endpointStr)
             client.Timeout = -1
             Dim request = New RestRequest(Method.GET)
 
@@ -63,21 +71,25 @@ Public Class ListadoSorteoApi
         Return retorno
     End Function
 
-    Public Shared Sub actualizarSorteado(sorteado As ListadoSorteoApi)
+    Public Shared Sub actualizarSorteado(tipoSorteo As Integer, sorteado As ListadoSorteoApi)
         Dim retorno As New BindingList(Of ListadoSorteoApi)
 
         Try
-            Dim urlEndpoint = My.MySettings.Default.apiurlActualizaSorteado + sorteado.Id.ToString
+
+            Dim endpointStr As String = ""
+
+            If tipoSorteo = 1 Then
+                endpointStr = "registrar_sorteado/" + sorteado.Id.ToString
+            Else
+                endpointStr = "registrar_sorteado2/" + sorteado.Id.ToString
+            End If
+
+            Dim urlEndpoint As String = My.MySettings.Default.endpintBase.ToString + endpointStr
             Dim client = New RestClient(urlEndpoint)
             client.Timeout = -1
             Dim request = New RestRequest(Method.GET)
 
             Dim response As IRestResponse = client.Execute(request)
-
-            ' Dim resultAPi As Root = JsonConvert.DeserializeObject(Of Root)(response.Content)
-
-
-            'retorno = resultAPi.data
 
         Catch ex As Exception
             XtraMessageBox.Show("Error al obtener listado de sorteo" & vbNewLine & "Motivo : " & ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -85,6 +97,7 @@ Public Class ListadoSorteoApi
 
 
     End Sub
+
 
 #End Region
 

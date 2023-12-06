@@ -9,14 +9,14 @@ Public Class frmSorteadorFFA2022
     Dim listSorteado As New BindingList(Of ListadoSorteoApi)
     Dim random As New Random
     Dim numeroSorteado As Integer = 0
-
+    Public tipoSorteado As Integer = 1
 
 #End Region
 
     Private Sub frmSorteadorFFA2022_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         CheckForIllegalCrossThreadCalls = False
 
-        listSorteo = ListadoSorteoApi.obtenerListaSorteo()
+        listSorteo = ListadoSorteoApi.obtenerListaSorteo(tipoSorteado)
         lblNombre.Visible = False
         pcFotoFuncionario.Visible = False
         '  pnlFoto.Visible = False
@@ -84,7 +84,7 @@ Public Class frmSorteadorFFA2022
                 listSorteado.Add(sorteado)
                 listSorteo.Remove(sorteado)
                 lblcantParticipantes.Text = listSorteo.Count.ToString + " participantes"
-                ListadoSorteoApi.actualizarSorteado(sorteado)
+                ListadoSorteoApi.actualizarSorteado(tipoSorteado, sorteado)
                 'listSorteo.Clear()
                 'listSorteo = ListadoSorteoApi.obtenerListaSorteo()
 
@@ -128,7 +128,7 @@ Public Class frmSorteadorFFA2022
                 lblcantParticipantes.Text = listSorteo.Count.ToString + " participantes"
                 ' ListadoSorteoApi.actualizarSorteado(sorteado)
                 'listSorteo.Clear()
-                listSorteo = ListadoSorteoApi.obtenerListaSorteo()
+                listSorteo = ListadoSorteoApi.obtenerListaSorteo(tipoSorteado)
             End If
         End While
     End Sub

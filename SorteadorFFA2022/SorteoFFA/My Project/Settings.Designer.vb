@@ -113,6 +113,18 @@ Namespace My
                 Me("apiurlActualizaSorteado") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("http://10.10.40.177/api/")>  _
+        Public Property endpintBase() As String
+            Get
+                Return CType(Me("endpintBase"),String)
+            End Get
+            Set
+                Me("endpintBase") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

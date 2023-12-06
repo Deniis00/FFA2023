@@ -128,9 +128,9 @@ Partial Class frmSorteadorFFA2022
         Me.lblNombre.AutoEllipsis = False
         Me.lblNombre.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.lblNombre.Font = New System.Drawing.Font("Microsoft Sans Serif", 4.0!, System.Drawing.FontStyle.Bold)
-        Me.lblNombre.Location = New System.Drawing.Point(0, 299)
+        Me.lblNombre.Location = New System.Drawing.Point(0, 281)
         Me.lblNombre.Name = "lblNombre"
-        Me.lblNombre.Size = New System.Drawing.Size(1045, 48)
+        Me.lblNombre.Size = New System.Drawing.Size(1060, 66)
         Me.lblNombre.TabIndex = 14
         '
         'pnlFoto
@@ -141,9 +141,9 @@ Partial Class frmSorteadorFFA2022
         Me.pnlFoto.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder
         Me.pnlFoto.Controls.Add(Me.lblNombre)
         Me.pnlFoto.Controls.Add(Me.pcFotoFuncionario)
-        Me.pnlFoto.Location = New System.Drawing.Point(27, 236)
+        Me.pnlFoto.Location = New System.Drawing.Point(12, 236)
         Me.pnlFoto.Name = "pnlFoto"
-        Me.pnlFoto.Size = New System.Drawing.Size(1045, 347)
+        Me.pnlFoto.Size = New System.Drawing.Size(1060, 347)
         Me.pnlFoto.TabIndex = 21
         '
         'pcFotoFuncionario
@@ -151,9 +151,9 @@ Partial Class frmSorteadorFFA2022
         Me.pcFotoFuncionario.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.pcFotoFuncionario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.pcFotoFuncionario.Image = CType(resources.GetObject("pcFotoFuncionario.Image"), System.Drawing.Image)
-        Me.pcFotoFuncionario.Location = New System.Drawing.Point(372, 3)
+        Me.pcFotoFuncionario.Location = New System.Drawing.Point(380, 3)
         Me.pcFotoFuncionario.Name = "pcFotoFuncionario"
-        Me.pcFotoFuncionario.Size = New System.Drawing.Size(301, 279)
+        Me.pcFotoFuncionario.Size = New System.Drawing.Size(301, 272)
         Me.pcFotoFuncionario.TabIndex = 3
         Me.pcFotoFuncionario.TabStop = False
         '
