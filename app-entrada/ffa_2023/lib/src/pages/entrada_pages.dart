@@ -37,7 +37,7 @@ class _EntradaPagesState extends State<EntradaPages> with RouteAware {
         VideoPlayerController.asset('assets/video/loop.mp4');
     _chewieController = ChewieController(
       videoPlayerController: _videoPlayerController,
-      aspectRatio: 16 / 9,
+      //aspectRatio: 16 / 9,
       autoPlay: true,
       looping: true,
       showControls: false,

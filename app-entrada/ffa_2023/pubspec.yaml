@@ -82,6 +82,7 @@ flutter:
     - assets/video/mire_la_pantalla.mp4
     - assets/img/list.png
     - assets/img/bienvenido.png
+    - assets/img/bienvenido.jpg
 
   fonts:
     - family: AMPLESOFT

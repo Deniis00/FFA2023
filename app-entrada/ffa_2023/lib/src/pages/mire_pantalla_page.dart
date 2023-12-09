@@ -43,7 +43,7 @@ class _MirePantallaState extends State<MirePantalla> {
           // Utiliza un widget Expanded para que la imagen ocupe el 100% de la pantalla
           Expanded(
             child: Image.asset(
-              'assets/img/bienvenido.png', // Reemplaza con la ruta correcta de tu imagen
+              'assets/img/bienvenido.jpg', // Reemplaza con la ruta correcta de tu imagen
               fit: BoxFit
                   .cover, // Ajusta la imagen para cubrir todo el espacio disponible
             ),
